@@ -19,7 +19,7 @@ var Enemy = function() {
   this.x = -100;
   this.y = enemyPosY[Math.floor(Math.random() * 3)];
   this.speed = enemySpeed[Math.floor(Math.random() * 7)];
-}
+};
 /** 
  * Updates the enemy's position.
  * And resets player when collision occurs.
@@ -65,13 +65,13 @@ Enemy.prototype.update = function(dt) {
     player.reset();
     gameLife.decrease();
   }
-}
+};
 /**
  * Renders enemy on the screen.
  */
 Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 
 /**
@@ -81,14 +81,14 @@ var Player = function() {
   this.pImg = playerImages[Math.floor(Math.random() * 5)];
   this.x = 404;
   this.y = 392;
-}
+};
 /** 
  * Updates the player's position.
  * The player's position is updated by the direction of ctlKey value.
  * The player's position resets when reach the water.
  */
 Player.prototype.update = function() {
-  if (this.ctlKey === 'left' && this.x != 0) {
+  if (this.ctlKey === 'left' && this.x !== 0) {
     this.x = this.x - 101;
   } else if (this.ctlKey === 'right' && this.x != 808) {
     this.x = this.x + 101;
@@ -103,27 +103,27 @@ Player.prototype.update = function() {
     this.reset();
     gameLife.decrease();
   }
-}
+};
 /**
  * Move the player to initial position.
  */
 Player.prototype.reset = function() {
   this.x = 404;
   this.y = 392;
-}
+};
 /**
  * Renders the player on the screen.
  */
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.pImg), this.x, this.y);
-}
+};
 /**
  * Sets control key for updating player's postion.
  * @param key Direction passed in from user's key input.
  */
 Player.prototype.handleInput = function(key) {
   this.ctlKey = key;
-}
+};
 
 
 /**
@@ -136,7 +136,7 @@ var Gem = function() {
   this.x = gemPosX[Math.floor(Math.random() * 9)];
   this.y = enemyPosY[Math.floor(Math.random() * 3)];
   this.count = 0;
-}
+};
 /** 
  * Updates gem's position.
  * Gem's position will reset whenever player touches it.
@@ -156,13 +156,13 @@ Gem.prototype.update = function() {
       gameScore.decrease(5);
     }
   }
-}
+};
 /**
  * Renders the gem on the screen.
  */
 Gem.prototype.render = function() {
   ctx.drawImage(Resources.get(this.gemImg), this.x, this.y);
-}
+};
 
 
 /**
@@ -172,7 +172,7 @@ Gem.prototype.render = function() {
 var Score = function() {
   this.scoreImg = 'images/Gem-Purple.jpg';
   this.score = 0;
-}
+};
 
 /**
  * Decrease score by 5 and add a life.
@@ -183,7 +183,7 @@ Score.prototype.decrease = function(n) {
     gameLife.life++;
     //console.log("After Score.dcrease: "+ this.score+" and life =" +gameLife.life+ "and gem count="+gem.count);
   }
-}
+};
 
 /**
  * Renders Score on the screen.
@@ -194,16 +194,15 @@ Score.prototype.render = function() {
   for (var i = 0; i < this.score; i++) {
       ctx.drawImage(Resources.get(this.scoreImg), x, 10);
       x = x + 50;
-  }
-  
-}
+  } 
+};
 /**
  * LIFE of the player.
  */
 var Life = function() {
   this.lifeImg = 'images/Heart-small.png';
   this.life = 5;
-}
+};
 /**
  * Renders life on the screen.
  */
@@ -216,14 +215,14 @@ Life.prototype.render = function() {
   
   // Game ends in allowedTime/60000 minutes or when life=0
   // To increase playtime value, change allowedTime value in line 12
-  if (this.life === 0 && msPlayTime < allowedTime) {
+  if (this.life === 0 && msPlayedTime < allowedTime) {
     ctx.drawImage(Resources.get('images/gameover.png'), 0, 15);
     ctx.font = '30px Arial';
     ctx.fillStyle = 'white';
     ctx.fillText("You collected "+gem.count+" gems; but no lives left!",200,420);
     ctx.fillText("Reload page to play again.",200,480);
     ctx.drawImage(Resources.get('images/background.png'), 0, 590);
-  } else if (msPlayTime >= allowedTime) {
+  } else if (msPlayedTime >= allowedTime) {
     ctx.drawImage(Resources.get('images/gameover.png'), 0, 15);
     ctx.font = '30px Arial';
     ctx.fillStyle = 'white';
@@ -231,7 +230,7 @@ Life.prototype.render = function() {
     ctx.fillText("Reload page to play again.",200,480);
     ctx.drawImage(Resources.get('images/background.png'), 0, 590);
   }
-}
+};
 /**
  * Decrease number of lives.
  */
@@ -239,7 +238,7 @@ Life.prototype.decrease = function() {
   if (this.life > 0) {
     this.life = this.life - 1;
   }
-}
+};
 
 
 // Now instantiate your objects.

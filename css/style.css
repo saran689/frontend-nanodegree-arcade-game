@@ -8,6 +8,12 @@ h1 {
   display: block;
   pointer-events: none;
 }
+h3 {
+  font-size: 1.2em;
+  font-style: italic;
+  display: block;
+  pointer-events: none;
+}
 #desc-box {
   display: block;
 }

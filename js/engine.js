@@ -4,8 +4,11 @@ var Engine = (function(global) {
     canvas = doc.createElement('canvas'),
     ctx = canvas.getContext('2d'),
     patterns = {},
+    startTime,
     lastTime;
 
+  var playedTime = 0;
+  
   canvas.width = 909;
   canvas.height = 850;
   doc.body.appendChild(canvas);
@@ -13,13 +16,14 @@ var Engine = (function(global) {
   function main() {
     var now = Date.now(),
       dt = (now - lastTime) / 1000.0;
-    var playedTime = 0;
+   
+    var msPlayedTime = 0;
     update(dt);
     render();
 
     lastTime = now;
     win.requestAnimationFrame(main);
-  };
+  }
 
   function init() {
 
@@ -79,8 +83,8 @@ var Engine = (function(global) {
     ctx.lineWidth = 2;
 
     playedTime = Date.now() - startTime;
-    msPlayTime = parseInt(playedTime, 10);
-    playedTime = msToTime(msPlayTime);
+    msPlayedTime = parseInt(playedTime, 10);
+    playedTime = msToTime(msPlayedTime);
     ctx.fillText("Time:",700, 40);
     ctx.strokeText("Time:",700, 40);
     //ctx.textAlign = "right";
